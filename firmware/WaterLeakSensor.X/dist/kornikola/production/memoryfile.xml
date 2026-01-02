@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project>                                  
+  <executable name="dist/kornikola/production/WaterLeakSensor.X.production.elf">                 
+    <memory name="program">                 
+      <units>bytes</units>                 
+      <length>1049728</length>                 
+      <used>218808</used>                     
+      <free>830920</free>                     
+    </memory>                              
+    <memory name="data">              
+      <units>bytes</units>                 
+      <length>524288</length>                 
+      <used>30040</used>                     
+      <free>494248</free>                     
+    </memory>                              
+  </executable>                            
+</project>                                 
