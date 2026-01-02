@@ -16,7 +16,7 @@ async function updateSensors() {
 
                 element.textContent = node.textContent;
 
-                // Логика изменения цвета
+
                 if (value > 1500) {
                     element.style.color = "red";
                 } else {
