@@ -1,5 +1,6 @@
 async function updateSensors() {
-    try {
+    try
+    {
 
         const response = await fetch('/status.xml?t=' + Date.now());
         const text = await response.text();
@@ -16,15 +17,20 @@ async function updateSensors() {
 
                 element.textContent = node.textContent;
 
-
-                if (value > 1500) {
+                if (value > 1500)
+                {
                     element.style.color = "red";
-                } else {
+                }
+                else
+                {
                     element.style.color = "green";
                 }
             }
         });
-    } catch (e) {
+
+    }
+    catch (e)
+    {
         console.error('Ошибка обновления:', e);
     }
 }

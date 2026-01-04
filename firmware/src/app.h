@@ -21,8 +21,8 @@ uint16_t adcValue1;
 uint16_t adcValue2; 
 uint16_t adcVolt;
 
-bool status1 = true;
-bool status2 = true;
+bool status1;
+bool status2;
 
 typedef enum
 {

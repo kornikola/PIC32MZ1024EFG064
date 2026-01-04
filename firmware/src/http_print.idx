@@ -2,7 +2,9 @@
 +sens2
 version
 +voltage
-+on1
-+off1
-+on2
-+off2
+on1
+off1
+on2
+off2
++btn1
++btn2

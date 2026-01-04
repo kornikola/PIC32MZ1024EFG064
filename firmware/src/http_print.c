@@ -44,10 +44,8 @@ void TCPIP_HTTP_Print(HTTP_CONN_HANDLE connHandle,uint32_t callbackID);
 void TCPIP_HTTP_Print_sens1(HTTP_CONN_HANDLE connHandle);
 void TCPIP_HTTP_Print_sens2(HTTP_CONN_HANDLE connHandle);
 void TCPIP_HTTP_Print_voltage(HTTP_CONN_HANDLE connHandle);
-void TCPIP_HTTP_Print_on1(HTTP_CONN_HANDLE connHandle);
-void TCPIP_HTTP_Print_off1(HTTP_CONN_HANDLE connHandle);
-void TCPIP_HTTP_Print_on2(HTTP_CONN_HANDLE connHandle);
-void TCPIP_HTTP_Print_off2(HTTP_CONN_HANDLE connHandle);
+void TCPIP_HTTP_Print_btn1(HTTP_CONN_HANDLE connHandle);
+void TCPIP_HTTP_Print_btn2(HTTP_CONN_HANDLE connHandle);
 
 void TCPIP_HTTP_Print(HTTP_CONN_HANDLE connHandle,uint32_t callbackID)
 {
@@ -60,20 +58,14 @@ void TCPIP_HTTP_Print(HTTP_CONN_HANDLE connHandle,uint32_t callbackID)
         case 0x00000001:
 			TCPIP_HTTP_Print_sens2(connHandle);
 			break;
-       case 0x00000003:
+        case 0x00000003:
 			TCPIP_HTTP_Print_voltage(connHandle);
 			break;
-       case 0x00000004:
-			TCPIP_HTTP_Print_on1(connHandle);
+        case 0x00000008:
+			TCPIP_HTTP_Print_btn1(connHandle);
 			break;
-       case 0x00000005:
-			TCPIP_HTTP_Print_off1(connHandle);
-			break;
-       case 0x00000006:
-			TCPIP_HTTP_Print_on2(connHandle);
-			break;
-       case 0x00000007:
-			TCPIP_HTTP_Print_off2(connHandle);
+        case 0x00000009:
+			TCPIP_HTTP_Print_btn2(connHandle);
 			break;
         default:
             // Output notification for undefined values

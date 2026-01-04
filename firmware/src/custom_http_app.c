@@ -1750,10 +1750,16 @@ void TCPIP_HTTP_Print_sens2(HTTP_CONN_HANDLE connHandle)
     TCPIP_TCP_StringPut(sktHTTP, Sens2Data);
 }
 
+void TCPIP_HTTP_Print_voltage(HTTP_CONN_HANDLE connHandle)
+{   
+     TCP_SOCKET sktHTTP;
+    sktHTTP = TCPIP_HTTP_CurrentConnectionSocketGet(connHandle);
+    TCPIP_TCP_StringPut(sktHTTP, (const uint8_t *)"3.3");
+}
 
-void TCPIP_HTTP_Print_on1(HTTP_CONN_HANDLE connHandle)
+void TCPIP_HTTP_Print_btn1(HTTP_CONN_HANDLE connHandle)
 {
-    TCP_SOCKET sktHTTP;
+     TCP_SOCKET sktHTTP;
     sktHTTP = TCPIP_HTTP_CurrentConnectionSocketGet(connHandle);
 
     if(status1 == true)
@@ -1766,13 +1772,11 @@ void TCPIP_HTTP_Print_on1(HTTP_CONN_HANDLE connHandle)
     }
 }
 
-
-void  TCPIP_HTTP_Print_on2(HTTP_CONN_HANDLE connHandle)
+void TCPIP_HTTP_Print_btn2(HTTP_CONN_HANDLE connHandle)
 {
     TCP_SOCKET sktHTTP;
     sktHTTP = TCPIP_HTTP_CurrentConnectionSocketGet(connHandle);
-
-
+    
     if(status2 == true)
     {
         TCPIP_TCP_StringPut(sktHTTP, (const uint8_t *)"on");
