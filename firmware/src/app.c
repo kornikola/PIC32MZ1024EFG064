@@ -125,75 +125,64 @@ void udpServer()
                 for(w2 = 0; w2 < wCurrentChunk; w2++)
                 {   
                     
-                    char stringResult[16];
-                    snprintf(stringResult, sizeof(stringResult), "%d\n", w2);
-                    TCPIP_TCP_ArrayPut(appData.socket, (uint8_t*)stringResult, strlen(stringResult));
-                    
-                    
                     if(AppBuffer[0] == '$'&& AppBuffer[w2] == '#')
                     {   
-                        
-                            if(AppBuffer[1] == 'I')
-                            {
-                                TCPIP_TCP_ArrayPut(appData.socket, "$IA#\n", 5);
-                                break;
-                            }
-                            else if(AppBuffer[1] == '2')
-                            {
-                                Valve1_2Off();
-                                
-                                break;
-                            }
-                            else if (AppBuffer[1] == '3')
-                            {
-                                Valve1_2On();
-                                
-                                break;
+                        if(AppBuffer[1] == 'I')
+                        {
+                            TCPIP_TCP_StringPut(appData.socket, "$IA#\n");
+                            break;
+                        }
+                        else if(AppBuffer[1] == '4')
+                        {   
+                            
 
-                            }
-                            else if (AppBuffer[1] == '4')
-                            {
+                            TCPIP_TCP_StringPut(appData.socket, "$4,");
+                            TCPIP_TCP_StringPut(appData.socket, "0,");
 
-                                char stringResult[16];
-                                snprintf(stringResult, sizeof(stringResult), "%d\n", adcValue1);
-                                TCPIP_TCP_ArrayPut(appData.socket, (uint8_t*)stringResult, strlen(stringResult));
-                                
-                                break;
-                            }
-                            else if (AppBuffer[1] == '5')
-                            {
-                                char stringResult[16];
-                                snprintf(stringResult, sizeof(stringResult), "%d\n", adcValue2);
-                                TCPIP_TCP_ArrayPut(appData.socket, (uint8_t*)stringResult, strlen(stringResult));
-                                break;
-                            }
-                            else if (AppBuffer[1] == '6')
-                            {
-                                char stringResult[16];
-                                snprintf(stringResult, sizeof(stringResult), "%d\n", adcVolt);
-                                TCPIP_TCP_ArrayPut(appData.socket, (uint8_t*)stringResult, strlen(stringResult));
-                                break;
-                            }
-                            else if (AppBuffer[1] == 'Q')
-                            {
-                                TCPIP_TCP_ArrayPut(appData.socket, "Connection was closed\n", 22);
-                                appData.state = APP_TCPIP_CLOSING_CONNECTION;
-                                break;
-                            }
-                             else
-                            {
-                                TCPIP_TCP_ArrayPut(appData.socket, "$ERROR#\n", 8);
-                            }
-                        
-                        
-                        
+                            TCPIP_TCP_StringPut(appData.socket, (uint8_t *)TCPIP_NETWORK_DEFAULT_IP_ADDRESS_IDX0);
+                            TCPIP_TCP_StringPut(appData.socket, ",\n");
 
+                            TCPIP_TCP_StringPut(appData.socket, (uint8_t *)TCPIP_NETWORK_DEFAULT_IP_MASK_IDX0);
+                            TCPIP_TCP_StringPut(appData.socket, ",\n");
+
+                            TCPIP_TCP_StringPut(appData.socket, (uint8_t *)TCPIP_NETWORK_DEFAULT_GATEWAY_IDX0);
+                            TCPIP_TCP_StringPut(appData.socket, ",\n");
+
+                            TCPIP_TCP_StringPut(appData.socket, (uint8_t *)TCPIP_NETWORK_DEFAULT_DNS_IDX0);
+                            TCPIP_TCP_StringPut(appData.socket, "#\n");
+
+                            break;
+                        }
+                        else if(AppBuffer[1] == '5')
+                        {
+                            TCPIP_TCP_StringPut(appData.socket, "$5,");
+                            TCPIP_TCP_StringPut(appData.socket, "0,");
+
+                            char portStr[10];
+                            sprintf(portStr, "%d", SERVER_PORT);
+                            TCPIP_TCP_StringPut(appData.socket, (uint8_t *)portStr);
+                            TCPIP_TCP_StringPut(appData.socket, "#\n");
+                            
+//                            char* flag = ",tcpPort";
+//                            if (strstr(AppBuffer,flag))
+//                            {
+//                                
+//                            }
+
+                        }
+                        else if (AppBuffer[1] == 'Q')
+                        {
+                            TCPIP_TCP_ArrayPut(appData.socket, "Connection was closed\n", 22);
+                            appData.state = APP_TCPIP_CLOSING_CONNECTION;
+                            break;
+                        }
+                         else
+                        {
+                            TCPIP_TCP_ArrayPut(appData.socket, "$ERROR#\n", 8);
+                        }
+                        
                     } 
-                    else
-                    {
-                        TCPIP_TCP_ArrayPut(appData.socket, "$ERROR($)#\n", 11);
-                    }
-
+                    
                 }
 
             }
